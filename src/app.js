@@ -4,6 +4,7 @@ const { getCustomer } = require('./middlewares/getCustomer');
 const Transaction = require('./models/Transaction');
 const mongoose = require('mongoose');
 const app = express();
+app.use(express.json());
 
 app.get('/portfolios/:id', getCustomer, async (req, res) => {
   const { id } = req.params
