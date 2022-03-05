@@ -1,6 +1,6 @@
 const { NotFoundError } = require('../errors/NotFoundError');
 const Customer = require('../models/Customer');
-const ERROR_MESSAGE  = require('../utils/messages/error-messages')
+const ERROR_MESSAGE = require('../utils/messages/error-messages')
 
 
 const getPortfolioById = async (id) => {
@@ -16,6 +16,17 @@ const getPortfolioById = async (id) => {
     return portfolio
 }
 
+
+const getPortfolioWithGoalReached = async (costumerId) => {
+    const costumer = await Customer
+        .findOne({ '_id': costumerId })
+        
+    const portfolios = costumer.portfolios.filter(item => item.amount >= item.goalAmount )
+
+    return portfolios
+}
+
 module.exports = {
-    getPortfolioById
+    getPortfolioById,
+    getPortfolioWithGoalReached
 }
