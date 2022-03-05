@@ -1,15 +1,17 @@
 const express = require('express');
-const Customer = require('./models/Customer');
-const { getCustomer } = require('./middlewares/getCustomer');
-const Transaction = require('./models/Transaction');
-const mongoose = require('mongoose');
+require('express-async-errors')
+const { router } = require('./routes')
+const { errorHandler } = require('./errors/handler')
+const Cors = require('cors')
+const { corsConfig } = require('./config')
+
 const app = express();
 app.use(express.json());
 
-app.get('/portfolios/:id', getCustomer, async (req, res) => {
-  const { id } = req.params
-  const portfolio = await Customer.findOne({ '_id': id })
-  res.json(portfolio)
-})
+app.use(Cors(corsConfig));
+
+
+app.use(router)
+app.use(errorHandler)
 
 module.exports = app
