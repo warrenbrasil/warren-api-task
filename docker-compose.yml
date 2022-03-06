@@ -18,7 +18,7 @@ services:
       - '9000:9000'
 
   db:
-    image: 'mongo'
+    image: 'mongo:latest'
     container_name: MONGODB
     ports:
       - '27017:27017'
