@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { getCustomer, validatePath, validateData } = require('../middlewares');
 const { TransactionController } = require('../controllers')
-const { depositPathSchema, doDepositSchema, transactionBetweenPortfolioPathSchema } = require('../validations')
+const { depositPathSchema, doDepositSchema, transactionBetweenPortfolioPathSchema, datePathSchema } = require('../validations')
 
 
 const TransactionRouter = Router()
@@ -10,6 +10,7 @@ TransactionRouter.get(
     '/deposits',
     getCustomer,
     validatePath(depositPathSchema),
+    validatePath(datePathSchema),
     TransactionController.getDeposits
 )
 
@@ -35,8 +36,6 @@ TransactionRouter.post(
     validateData(doDepositSchema),
     TransactionController.transferBetweenPortfolios
 )
-
-
 
 module.exports = {
     TransactionRouter
