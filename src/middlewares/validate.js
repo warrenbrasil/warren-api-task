@@ -1,3 +1,9 @@
+const validatePath = schema => async (req, res, next) => {
+  const path = req.query
+  await schema.validate(path, { abortEarly: false })
+  next()
+}
+
 const validateData = (schema) => async (req, res, next) => {
   const data = req.body;
   await schema
@@ -6,4 +12,4 @@ const validateData = (schema) => async (req, res, next) => {
 };
 
 
-module.exports = {validateData}
+module.exports = { validateData, validatePath }

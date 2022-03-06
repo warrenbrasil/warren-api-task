@@ -1,7 +1,8 @@
 const {getCustomer} = require('./getCustomer')
-const {validateData} = require('./validate')
+const {validateData, validatePath} = require('./validate')
 
 module.exports = {
     getCustomer,
-    validateData
+    validateData,
+    validatePath
 }

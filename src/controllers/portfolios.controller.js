@@ -13,8 +13,8 @@ const getPortfolioWithGoalReached = async (req, res) => {
     const customerId = req.header('customer-id')
 
     const portfolios = await PortfolioService.getPortfolioWithGoalReached(customerId)
+    
     return res.status(httpStatus.OK).json(portfolios)
-    // return res.status(httpStatus.OK).json({customerId})
 }
 
 module.exports = {
